@@ -36,9 +36,9 @@ class WhaleDataset(Dataset):
         idx = self.paths[item][0]
         img = load_img(self.paths[item][1])
         if self.data_augmentations is not None:
-            return self.data_augmentations(image=img),idx
-        else:
-            return img,idx
+            augmented = self.data_augmentations(image=img)
+            img = augmented["image"]
+        return img,idx
     def __len__(self):
         return len(self.paths)
 
